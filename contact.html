@@ -36,9 +36,20 @@
                   console.log(email)
                   console.log(message)
 
-        //          if(name==null && email==null && message==null ){
+                  //if(name==null && email==null && message==null ){
                   if(name!=='' && email!=='' && message!=='' ){
-                    alert("Thankyou "+name+" For Submitting Details");
+                    var str="Thankyou "+name.trim()+" For Submitting Details"
+                    //alert(str);
+                    if(confirm(str))
+                    { window.location="/KDFITNESSWEBSITE/hello.html"
+                      //document.body.appendChild(/KDFITNESSWEBSITE/hello.html);
+                      //str.link(/KDFITNESSWEBSITE/hello.html);
+                      //console.log("True");
+                      //console.log(window.location="/KDFITNESSWEBSITE/hello.html")
+                    } 
+                    else
+                      window.location="/KDFITNESSWEBSITE/contact.html"
+
                   }
                   else
                   alert("Please Fill The form")
