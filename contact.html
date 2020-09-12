@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
     <title>KD FITNESS</title>
 </head>
 <body>
- 
+  <!-- <script src="/__/firebase/init.js"></script> -->
     <section class="text-gray-700 body-font relative">
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-12">
@@ -40,7 +42,7 @@
                   if(name!=='' && email!=='' && message!=='' ){
                     var str="Thankyou "+name.trim()+" For Submitting Details"
                     alert(str);
-                    window.location="/KDFITNESSWEBSITE/hello.html"
+                    //window.location="/KDFITNESSWEBSITE/hello.html"
                     /* if(confirm(str))
                     { window.location="/KDFITNESSWEBSITE/hello.html"
                       //document.body.appendChild(/KDFITNESSWEBSITE/hello.html);
@@ -50,6 +52,54 @@
                     } 
                     else
                       window.location="/KDFITNESSWEBSITE/contact.html" */
+
+                      //src="/__/firebase/7.20.-/firebase-app.js">
+
+                      
+                      //src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"
+                        var firebaseConfig = {
+                          apiKey: "AIzaSyDiETGP_VIaxFiwSYP49qDnnwuI-AEtGv4",
+                          authDomain: "kd-fitness-web.firebaseapp.com",
+                          databaseURL: "https://kd-fitness-web.firebaseio.com",
+                          projectId: "kd-fitness-web",
+                          storageBucket: "kd-fitness-web.appspot.com",
+                          messagingSenderId: "118032702310",
+                          appId: "1:118032702310:web:f0b3d7d64019f26231c6a7"
+                        };
+                        firebase.initializeApp(firebaseConfig);
+
+                        /*
+                        //var database = firebase.database();
+                        //var database = firebase.database().ref('/users/'+userId.value);
+                        var database = firebase.database().ref("users/");
+                        
+                         //function writeUserData(name, email, message) {
+                          //var users=database.ref();
+                          
+                          //users.set ({
+                            database.set ({
+                            name: {
+                              email: email,
+                              message: message
+                            }
+                         });
+                          //var oneUser=userRefdemo.child(obj.roll);
+                        //}
+                        
+                        //writeUserData(name,email,message);
+
+
+                        //var database = firebase.database().ref('/users/'+userId.value); */
+                        const database=firebase.database();
+                        database.ref('/contacts/' + name).set({
+                          //name: name.value,
+                          e_mail: email,
+                          c_message : message
+                        });
+
+                        window.location="/KDFITNESSWEBSITE/hello.html"
+
+                      
 
                   }
                   else
