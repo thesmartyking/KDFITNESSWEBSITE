@@ -42,6 +42,19 @@
                   if(name!=='' && email!=='' && message!=='' ){
                     var str="Thankyou "+name.trim()+" For Submitting Details";
 
+                    //var crdate=new Date().toLocaleString();
+                    var crtime=new Date().toLocaleTimeString('en-US', { hour12: true, hour: "numeric", minute: "numeric"});
+                   // console.log(crdate);
+                    console.log(crtime);
+
+                    var crdate1=new Date();
+                    var d = crdate1.getDate();
+		                var m = crdate1.getMonth() + 1;
+		                var y = crdate1.getFullYear();
+                    var dateString = (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                    console.log(dateString);
+
+
                     var firebaseConfig = {
                       apiKey: "AIzaSyDiETGP_VIaxFiwSYP49qDnnwuI-AEtGv4",
                       authDomain: "kd-fitness-web.firebaseapp.com",
@@ -54,17 +67,48 @@
                     firebase.initializeApp(firebaseConfig);
                     console.log(firebase)
 
-                    const database=firebase.database();
+                    /*const database=firebase.database();
                     database.ref('/contacts/' + name).set({
                       //C_Name: name,
                       u_mail: email,
                       u_message : message
-                    }); 
+                    }); */
+
+                   /* const database=firebase.database();
+                    database.ref('/contacts/' + dateString + '-' + crtime).set({
+                      u_Name: name,
+                      u_mail: email,
+                      u_message : message
+                    }); */
+
+                    var datetime=dateString+"-"+crtime
+                    var database=firebase.database();
+                        var ref = database.ref('/contacts/');
+                        var data={
+                          c_date_time:datetime,
+                          a_name:name,
+                          b_email: email,
+                          d_message : message
+                        }
+                        ref.push(data);
+
+                      
+
+                    document.getElementById("name").value='';
+                    document.getElementById("email").value='';
+                    document.getElementById("message").value='';
+
+
+
+                        //console.log(ref.get(data));
+                    
+                    
 
                     
-                    alert(str);
+                    //alert(str);
+                    //tohome();
                     //window.location="/KDFITNESSWEBSITE/hello.html"
-                    window.location.href="https://thesmartyking.github.io/KDFITNESSWEBSITE/hello.html";
+                    //window.location.href="https://thesmartyking.github.io/KDFITNESSWEBSITE/hello.html";
                     //window.location.replace("http://www.w3schools.com");
 
                     //window.location="/KDFITNESSWEBSITE/hello.html"
@@ -142,6 +186,17 @@
                   else
                   alert("Please Fill The form")
                 }
+                /*function tohome() {
+                  window.location="/KDFITNESSWEBSITE/hello.html";
+                  }*/
+                </script>
+            </div>
+            <div class="p-2 w-full">
+              <button onclick="tohome()" class="flex mx-auto text-white bg-blue-600 border-0 py-1 px-4 focus:outline-none hover:bg-blue-800 rounded text-lg">Back to Home</button>
+              <script>
+                function tohome() {
+                  window.location="/KDFITNESSWEBSITE/hello.html";
+                  }
                 </script>
             </div>
             <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
