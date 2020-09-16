@@ -72,8 +72,11 @@
                   <input name="plan" type="radio">
                 </td>
               </tr>
-        -->         </tbody>
-          </table>
+        -->        
+
+
+      
+
 
           <script>
             var firebaseConfig = {
@@ -115,6 +118,17 @@
                      document.getElementById("email").innerHTML = contacts[k].b_email;
                      document.getElementById("date").innerHTML = contacts[k].c_date_time;
                      document.getElementById("message").innerHTML = contacts[k].d_message;
+                     
+                    /* for (var a=0; a <4 ; a++) {
+                      document.write("<tr>");
+                      for(var b=0; b<4; b++) {
+                      document.write("<td>"+contacts[k].a_name+"</td>");
+                      document.write("<td>"+contacts[k].b_email+"</td>");
+                      document.write("<td>"+contacts[k].c_date_time+"</td>");
+                      document.write("<td>"+contacts[k].d_message+"</td>");
+                      }
+                      document.write("</tr>");
+                      } */
 
                 }
   
@@ -144,6 +158,8 @@
 
           </script>
         
+        </tbody>
+      </table>
       </div>
       <!-- <p id="demo"></p> -->
       <!-- <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
