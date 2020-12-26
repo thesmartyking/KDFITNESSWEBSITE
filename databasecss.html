@@ -40,9 +40,9 @@
                 <td id="email" class="px-4 py-3"></td>
                 <td id="date" class="px-4 py-3"></td>
                 <td id="message" class="px-4 py-3"></td>
-              </tr> -->   
+              </tr> -->
             </tbody>
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+            <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
             <script>
               var firebaseConfig = {
                 apiKey: "AIzaSyDiETGP_VIaxFiwSYP49qDnnwuI-AEtGv4",
@@ -77,15 +77,38 @@
                   var datetime=contacts[k].c_date_time;
                   var message=contacts[k].d_message;
                   //console.log(names,email,datetime,message);
-                  console.table([name,email,datetime,message]);
+                  console.table([name, email, datetime, message]);
 
-                  content += "<tr>";
-                  content += "<td class='px-4 py-3'>" + name + "</td>";
-                  content += "<td class='px-4 py-3'>" + email + "</td>";
-                  content += "<td class='px-4 py-3'>" + datetime + "</td>";
-                  content += "<td class='px-4 py-3'>" + message + "</td>";
-                  content += "</tr>";
-                  $('#firebase-data').append(content); 
+                  // content += "<tr>";
+                  // content += "<td class='px-4 py-3'>" + name + "</td>";
+                  // content += "<td class='px-4 py-3'>" + email + "</td>";
+                  // content += "<td class='px-4 py-3'>" + datetime + "</td>";
+                  // content += "<td class='px-4 py-3'>" + message + "</td>";
+                  // content += "</tr>";
+
+                  var newRow = document.createElement('tr');
+                  var newCellV = document.createElement('td');
+                  newCellV.setAttribute('class', 'px-4 py-3');
+                  newCellV.innerHTML = name;
+                  
+                  var newCellW = document.createElement('td');
+                  newCellW.setAttribute('class', 'px-4 py-3');
+                  newCellW.innerHTML = email;
+
+                  var newCellX = document.createElement('td');
+                  newCellX.setAttribute('class', 'px-4 py-3');
+                  newCellX.innerHTML = datetime;
+                  
+                  var newCellY = document.createElement('td');
+                  newCellY.setAttribute('class', 'px-4 py-3');
+                  newCellY.innerHTML = message;
+
+                  newRow.appendChild(newCellV);
+                  newRow.appendChild(newCellW);
+                  newRow.appendChild(newCellX);
+                  newRow.appendChild(newCellY);
+
+                  document.getElementById('firebase-data').appendChild(newRow);
                 }
                 
               }, function (error) {
