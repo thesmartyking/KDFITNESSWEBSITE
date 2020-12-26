@@ -34,52 +34,17 @@
                 <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr rounded-br"></th>
               </tr>
             </thead>
-            <tbody>
-                
-              <tr id="tr">
+            <tbody id="firebase-data">
+              <!-- <tr id="tr">
                 <td id="name" class="px-4 py-3"></td>
                 <td id="email" class="px-4 py-3"></td>
                 <td id="date" class="px-4 py-3"></td>
                 <td id="message" class="px-4 py-3"></td>
-                <!-- <td class="w-10 text-center">
-                  <input name="plan" type="radio">
-                </td> -->
-              </tr>
-            <!--   <tr>
-                <td class="border-t-2 border-gray-200 px-4 py-3">Pro</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">25 Mb/s</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">25 GB</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">$24</td>
-                <td class="border-t-2 border-gray-200 w-10 text-center">
-                  <input name="plan" type="radio">
-                </td>
-              </tr>
-              <tr>
-                <td class="border-t-2 border-gray-200 px-4 py-3">Business</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">36 Mb/s</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">40 GB</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">$50</td>
-                <td class="border-t-2 border-gray-200 w-10 text-center">
-                  <input name="plan" type="radio">
-                </td>
-              </tr>
-              <tr>
-                <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Exclusive</td>
-                <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">48 Mb/s</td>
-                <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">120 GB</td>
-                <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">$72</td>
-                <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-                  <input name="plan" type="radio">
-                </td>
-              </tr>
-        -->        
-
-
-      
-
-
-          <script>
-            var firebaseConfig = {
+              </tr> -->   
+            </tbody>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+            <script>
+              var firebaseConfig = {
                 apiKey: "AIzaSyDiETGP_VIaxFiwSYP49qDnnwuI-AEtGv4",
                 authDomain: "kd-fitness-web.firebaseapp.com",
                 databaseURL: "https://kd-fitness-web.firebaseio.com",
@@ -97,69 +62,37 @@
   
               
               ref.on("value", function(snapshot) {
-                  //var contacts=snapshot.val();
+                //var contacts=snapshot.val();
                 //console.log(snapshot.val());
-  
+                  
                 var contacts=snapshot.val();
                 var keys=Object.keys(contacts)
-                //console.log(keys)
 
-                for (var i=0;i<keys.length;i++)
+                for (var i=0; i<keys.length; i++)
                 {
-                    var k=keys[i];
-                    var names=contacts[k].a_name;
-                    var email=contacts[k].b_email;
-                    var datetime=contacts[k].c_date_time;
-                    var message=contacts[k].d_message;
-                    //console.log(names,email,datetime,message);
-                    console.table([names,email,datetime,message]);
-  
-                     document.getElementById("name").innerHTML = contacts[k].a_name;
-                     document.getElementById("email").innerHTML = contacts[k].b_email;
-                     document.getElementById("date").innerHTML = contacts[k].c_date_time;
-                     document.getElementById("message").innerHTML = contacts[k].d_message;
-                     
-                    /* for (var a=0; a <4 ; a++) {
-                      document.write("<tr>");
-                      for(var b=0; b<4; b++) {
-                      document.write("<td>"+contacts[k].a_name+"</td>");
-                      document.write("<td>"+contacts[k].b_email+"</td>");
-                      document.write("<td>"+contacts[k].c_date_time+"</td>");
-                      document.write("<td>"+contacts[k].d_message+"</td>");
-                      }
-                      document.write("</tr>");
-                      } */
+                  var k = keys[i];
+                  var content = '';
+                  var name=contacts[k].a_name;
+                  var email=contacts[k].b_email;
+                  var datetime=contacts[k].c_date_time;
+                  var message=contacts[k].d_message;
+                  //console.log(names,email,datetime,message);
+                  console.table([name,email,datetime,message]);
 
+                  content += "<tr>";
+                  content += "<td class='px-4 py-3'>" + name + "</td>";
+                  content += "<td class='px-4 py-3'>" + email + "</td>";
+                  content += "<td class='px-4 py-3'>" + datetime + "</td>";
+                  content += "<td class='px-4 py-3'>" + message + "</td>";
+                  content += "</tr>";
+                  $('#firebase-data').append(content); 
                 }
-  
-             }, function (error) {
+                
+              }, function (error) {
                 console.log("Error: " + error.code);
-             });
-             
-             
-
-
-            /* ref.once("value", function(snapshot){
-             snapshot.forEvery(function (childSnapshot)
-             {
-                 var ckey=childSnapshot.keys;
-                 var childData=childSnapshot.val();
-                 document.getElementById("name").innerHTML = childData['a_name'];
-                 document.getElementById("date").innerHTML = childData['c_date_time'];
-                 document.getElementById("email").innerHTML = childData['b_email'];
-                 document.getElementById("message").innerHTML =  childData['d_message'];
-             })
-
-            }, function (error) {
-                console.log("Error: " + error.code);
-            }); */
-        
-
-
+            });
           </script>
-        
-        </tbody>
-      </table>
+        </table>
       </div>
       <!-- <p id="demo"></p> -->
       <!-- <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
